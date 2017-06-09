@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form>
+		<p:growl autoUpdate="true" />
+		<p:menubar orientation="horizonal" style="margin-top:20px">
+			<p:submenu label="Kullanici" icon="ui-icon-check"  >
+
+				<p:menuitem value="kullanici ekle" url="#" />
+				<p:separator />
+				<p:menuitem value="kullanici sil" url="#" />
+
+			</p:submenu>
+
+			<p:submenu label="Sunucu" icon="ui-icon-check">
+
+				<p:menuitem value="Sunucu ekle" url="#" />
+				<p:separator />
+				<p:menuitem value="Sunucu sil" url="#" />
+
+			</p:submenu>
+			
+			<p:submenu label="Rol" >
+
+				<p:menuitem value="Roller" url="rollistele.xhtml" />
+				<p:separator />
+				
+
+			</p:submenu>
+			
+		</p:menubar>
+
+	</h:form>>
+
+</ui:composition>
+
+</html>

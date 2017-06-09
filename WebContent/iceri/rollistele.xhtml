@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Insert title here</title>
+</h:head>
+<h:body>
+	<ui:include src="menu.xhtml" />
+
+
+	<p:panelGrid columns="2" id="roller">
+
+		<h:form>
+			<p:dataTable id="tbl" var="rol" value="#{rolBean.rolList}"
+				paginator="true" rows="10">
+				<p:column headerText="Id">
+					<h:outputText value="#{rol.id}" />
+				</p:column>
+
+				<p:column headerText="Rolü">
+					<h:outputText value="#{rol.name}" />
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+
+		<h:form>
+			<p:panel>
+			
+				<p:panel>
+					<h:outputText value="Rol Ekle" />
+					<br />
+					<p:inputText value="#{rolBean.rolAdd.name}" />
+					<br />
+					<p:commandButton id="rolEkle" value="Rol Ekle"
+						action="#{rolBean.rolEkle}" update="roller" />
+				</p:panel>
+				<p:separator />
+				<p:panel>
+
+					<h:outputText value="Rol Sil" />
+					<br />
+					<p:selectOneMenu id="rol" converter="RolConverter"
+						value="#{rolBean.secilenRol}">
+						<f:selectItems var="rol" itemValue="#{rol}"
+							itemLabel="#{rol.name}" value="#{rolBean.rolList}" />
+					</p:selectOneMenu>
+					<br />
+					
+				<p:commandButton id="rolsil" value="Rol Sil" action="#{rolBean.rolSil}" update="roller"></p:commandButton>
+
+				</p:panel>
+
+			</p:panel>
+		</h:form>
+
+	</p:panelGrid>
+
+</h:body>
+</html>

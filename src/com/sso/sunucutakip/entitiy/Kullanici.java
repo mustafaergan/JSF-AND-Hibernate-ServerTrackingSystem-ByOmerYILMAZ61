@@ -19,8 +19,11 @@ public class Kullanici {
 	@GeneratedValue
 	private int id;
 	
-	@Column(name = "name")
-	private String name;
+	@Column(name = "Kullanici_Adi")
+	private String kullaniciAdi;
+	
+	@Column(name = "sifre")
+	private String sifre;
 	
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="kullanici_rol",joinColumns= @JoinColumn(name = "kullanici_id"),
@@ -28,7 +31,6 @@ public class Kullanici {
 	private  List<Rol>  rol;
 	
 	@OneToOne
-	@JoinTable(name = "personel_id")
 	private Personel personel;
 
 	public int getId() {
@@ -39,12 +41,22 @@ public class Kullanici {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+
+
+	public String getKullaniciAdi() {
+		return kullaniciAdi;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setKullaniciAdi(String kullaniciAdi) {
+		this.kullaniciAdi = kullaniciAdi;
+	}
+
+	public String getSifre() {
+		return sifre;
+	}
+
+	public void setSifre(String sifre) {
+		this.sifre = sifre;
 	}
 
 	public List<Rol> getRol() {
