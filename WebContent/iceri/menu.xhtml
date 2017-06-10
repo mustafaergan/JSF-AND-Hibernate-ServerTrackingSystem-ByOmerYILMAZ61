@@ -15,9 +15,11 @@
 	<h:form>
 		<p:growl autoUpdate="true" />
 		<p:menubar orientation="horizonal" style="margin-top:20px">
-			<p:submenu label="Kullanici" icon="ui-icon-check"  >
+			<p:submenu label="Kullanici" icon="ui-icon-check">
 
-				<p:menuitem value="kullanici ekle" url="#" />
+				<p:menuitem value="Kullanici Listele" url="kullaniciListele.xhtml" />
+				<p:separator />
+				<p:menuitem value="Kullanici Ekle" url="kullaniciEkle.xhtml" />
 				<p:separator />
 				<p:menuitem value="kullanici sil" url="#" />
 
@@ -30,15 +32,15 @@
 				<p:menuitem value="Sunucu sil" url="#" />
 
 			</p:submenu>
-			
-			<p:submenu label="Rol" >
+
+			<p:submenu label="Rol">
 
 				<p:menuitem value="Roller" url="rollistele.xhtml" />
 				<p:separator />
-				
+
 
 			</p:submenu>
-			
+
 		</p:menubar>
 
 	</h:form>>

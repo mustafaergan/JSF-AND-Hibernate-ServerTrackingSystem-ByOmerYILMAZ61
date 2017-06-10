@@ -12,6 +12,7 @@ import org.hibernate.criterion.Restrictions;
 
 import com.sso.sunucutakip.entitiy.GirisEntity;
 import com.sso.sunucutakip.entitiy.Kullanici;
+import com.sso.sunucutakip.entitiy.Personel;
 import com.sso.sunucutakip.entitiy.Rol;
 
 public class DAO {
@@ -100,6 +101,35 @@ public class DAO {
 		}
 		
 		
+	}
+
+	public void ekle(Object obj) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try {
+
+			tx = session.beginTransaction();
+			session.save(obj);
+			tx.commit();
+
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+	}
+
+	public List<Kullanici> getKullaniciList() {
+		Session session = sessionFactory.openSession();
+
+		Criteria criteria = session.createCriteria(Kullanici.class);
+
+		List<Kullanici> list = criteria.list();
+		
+		return list;
 	}
 
 	

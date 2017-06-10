@@ -9,7 +9,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
-import com.sso.sunucutakip.bean.RolBean;
+import com.sso.sunucutakip.bean.KullaniciBean;
 import com.sso.sunucutakip.entitiy.Rol;
 
 @FacesConverter("RolConverter")
@@ -18,7 +18,7 @@ public class RolConverter implements Converter {
     public Object getAsObject(FacesContext fc, UIComponent uic, String value) {
         if(value != null && value.trim().length() > 0) {
             try {
-                RolBean service = (RolBean) fc.getExternalContext().getSessionMap().get("rolBean");
+                KullaniciBean service = (KullaniciBean) fc.getExternalContext().getSessionMap().get("kullaniciBean");
                 int id = Integer.parseInt(value);
                 service.getRolList();
                 return  getMyRol(id, service.getRolList());

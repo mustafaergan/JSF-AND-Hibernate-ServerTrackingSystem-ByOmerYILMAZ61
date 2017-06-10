@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Insert title here</title>
+</h:head>
+<h:body>
+	<ui:include src="menu.xhtml" />
+
+	<h:form id="deneme">
+
+	<p:panelGrid columns="2">
+		<h:outputText value="isim:" />
+		<p:inputText value="#{kullaniciBean.personelAdd.name}" />
+		
+		
+		<h:outputText id="kullaniciAdd" value="kullanici Adi" />
+		<p:inputText value="#{kullaniciBean.kullaniciAdd.kullaniciAdi}" />
+		
+		<h:outputText id="sifreAdd" value="Sifre" />
+		<p:password value="#{kullaniciBean.kullaniciAdd.sifre}"/>
+		
+		<!-- 				<p:selectManyMenu value="#{kullaniciBean.selectedRols}" -->
+		<!-- 					converter="RolConverter" filter="true" filterMatchMode="contains" -->
+		<!-- 					var="rol"  showCheckbox="true"> -->
+
+		<!-- 					<f:selectItems value="#{kullaniciBean.rolList}" var="rol" -->
+		<!-- 						itemLabel="#{rol.name}" itemValue="#{rol}" /> -->
+
+		<!-- 					<p:column> -->
+		<!-- 						<h:outputText value="#{rol.name}" /> -->
+		<!-- 					</p:column> -->
+
+		<!-- 				</p:selectManyMenu> -->
+
+		<p:selectCheckboxMenu id="menu" value="#{kullaniciBean.selectedRols}"
+			converter="RolConverter" label="Roller" filter="true"
+			filterMatchMode="startsWith" panelStyle="width:250px">
+			<f:selectItems value="#{kullaniciBean.rolList}" var="rol"
+				itemLabel="#{rol.name}" itemValue="#{rol}" />
+		</p:selectCheckboxMenu>
+
+
+		<p:commandButton value="Ekle"
+			action="#{kullaniciBean.kullaniciEkle()}" update="deneme"></p:commandButton>
+
+		<!-- 		<p:dataList value="#{kullaniciBean.selectedRols}" var="t"> -->
+		<!-- 			<h:outputText value="#{t.name}" /> -->
+		<!-- 		</p:dataList> -->
+
+		</p:panelGrid>
+	</h:form>
+
+
+</h:body>
+</html>

@@ -43,18 +43,6 @@ public class LoginBean implements Serializable {
 			}
 	}
 	
-
-	public boolean kontrolEt(){
-		for (Rol rol : this.kullanici.getRol()) {
-			if(rol.getName().equals("admin")){
-				return true;
-			}
-		}
-	return false;
-	}
-	
-	
-
 	
 	public GirisEntity getGirisEntity() {
 		return girisEntity;
