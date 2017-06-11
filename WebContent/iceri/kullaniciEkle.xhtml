@@ -45,13 +45,10 @@
 				itemLabel="#{rol.name}" itemValue="#{rol}" />
 		</p:selectCheckboxMenu>
 
-
+		<h:outputText />
 		<p:commandButton value="Ekle"
 			action="#{kullaniciBean.kullaniciEkle()}" update="deneme"></p:commandButton>
-
-		<!-- 		<p:dataList value="#{kullaniciBean.selectedRols}" var="t"> -->
-		<!-- 			<h:outputText value="#{t.name}" /> -->
-		<!-- 		</p:dataList> -->
+		
 
 		</p:panelGrid>
 	</h:form>

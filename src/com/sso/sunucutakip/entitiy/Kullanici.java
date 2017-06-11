@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -25,7 +26,7 @@ public class Kullanici {
 	@Column(name = "sifre")
 	private String sifre;
 	
-	@OneToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="kullanici_rol",joinColumns= @JoinColumn(name = "kullanici_id"),
 						inverseJoinColumns = @JoinColumn(name = "rol_id"))
 	private  List<Rol>  rol;

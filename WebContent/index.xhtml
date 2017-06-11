@@ -17,14 +17,14 @@
         <p:graphicImage height="200" width="200" url="/icon/bay.jpg" />
     </f:facet>
  
-    <h:outputText value="isim:" />
-    <p:inputText value="#{loginBean.girisEntity.userName}"/>
+    <h:outputText value="isim:"  />
+    <p:inputText value="#{loginBean.girisEntity.userName}" id="girisuser"/>
  
-    <h:outputText value="Sifre:" />
-     <p:password value="#{loginBean.girisEntity.passWord}"/> 
+    <h:outputText value="Sifre:" "/>
+     <p:password value="#{loginBean.girisEntity.passWord}" id="girissif"/> 
  
     <h:outputText value=" " />
-     <p:commandButton value="Giris" update="loginForm" action="#{loginBean.login}"/> 
+     <p:commandButton value="Giris" update="loginForm" action="#{loginBean.login}" id="giris"/> 
  
 </p:panelGrid>
 </h:form>

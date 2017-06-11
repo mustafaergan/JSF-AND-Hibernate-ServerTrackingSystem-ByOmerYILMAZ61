@@ -132,6 +132,25 @@ public class DAO {
 		return list;
 	}
 
+	public void kullaniciEkle(Kullanici kullaniciAdd) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try {
+
+			tx = session.beginTransaction();
+			session.save(kullaniciAdd);
+			tx.commit();
+
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+	}
+
 	
 	
 	
