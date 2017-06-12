@@ -12,43 +12,46 @@
 <h:body>
 	<ui:include src="menu.xhtml" />
 
-	<h:form id="deneme">
+	<h:form id="kullanici">
 
-	<p:panelGrid columns="2">
-		<h:outputText value="isim:" />
-		<p:inputText value="#{kullaniciBean.personelAdd.name}" />
-		
-		
-		<h:outputText id="kullaniciAdd" value="kullanici Adi" />
-		<p:inputText value="#{kullaniciBean.kullaniciAdd.kullaniciAdi}" />
-		
-		<h:outputText id="sifreAdd" value="Sifre" />
-		<p:password value="#{kullaniciBean.kullaniciAdd.sifre}"/>
-		
-		<!-- 				<p:selectManyMenu value="#{kullaniciBean.selectedRols}" -->
-		<!-- 					converter="RolConverter" filter="true" filterMatchMode="contains" -->
-		<!-- 					var="rol"  showCheckbox="true"> -->
+		<p:panelGrid columns="2">
+			<h:outputText value="isim:" />
+			<p:inputText value="#{kullaniciBean.personelAdd.name}" />
 
-		<!-- 					<f:selectItems value="#{kullaniciBean.rolList}" var="rol" -->
-		<!-- 						itemLabel="#{rol.name}" itemValue="#{rol}" /> -->
 
-		<!-- 					<p:column> -->
-		<!-- 						<h:outputText value="#{rol.name}" /> -->
-		<!-- 					</p:column> -->
+			<h:outputText id="kullaniciAdd" value="kullanici Adi" />
+			<p:inputText value="#{kullaniciBean.kullaniciAdd.kullaniciAdi}" />
 
-		<!-- 				</p:selectManyMenu> -->
+			<h:outputText id="sifreAdd" value="Sifre" />
+			<p:password value="#{kullaniciBean.kullaniciAdd.sifre}" />
 
-		<p:selectCheckboxMenu id="menu" value="#{kullaniciBean.selectedRols}"
-			converter="RolConverter" label="Roller" filter="true"
-			filterMatchMode="startsWith" panelStyle="width:250px">
-			<f:selectItems value="#{kullaniciBean.rolList}" var="rol"
-				itemLabel="#{rol.name}" itemValue="#{rol}" />
-		</p:selectCheckboxMenu>
+			<!-- 				<p:selectManyMenu value="#{kullaniciBean.selectedRols}" -->
+			<!-- 					converter="RolConverter" filter="true" filterMatchMode="contains" -->
+			<!-- 					var="rol"  showCheckbox="true"> -->
 
-		<h:outputText />
-		<p:commandButton value="Ekle"
-			action="#{kullaniciBean.kullaniciEkle()}" update="deneme"></p:commandButton>
-		
+			<!-- 					<f:selectItems value="#{kullaniciBean.rolList}" var="rol" -->
+			<!-- 						itemLabel="#{rol.name}" itemValue="#{rol}" /> -->
+
+			<!-- 					<p:column> -->
+			<!-- 						<h:outputText value="#{rol.name}" /> -->
+			<!-- 					</p:column> -->
+
+			<!-- 				</p:selectManyMenu> -->
+
+			<p:selectCheckboxMenu id="menu"
+				value="#{kullaniciBean.selectedRols}" converter="RolConverter"
+				label="Roller" filter="true" filterMatchMode="startsWith"
+				panelStyle="width:250px">
+				<f:selectItems value="#{kullaniciBean.rolList}" var="rol"
+					itemLabel="#{rol.name}" itemValue="#{rol}" />
+			</p:selectCheckboxMenu>
+
+
+			<h:outputText></h:outputText>
+			<p:commandButton value="Kullanici Ekle"
+				action="#{kullaniciBean.kullaniciEkle()}" update="kullanici"></p:commandButton>
+
+
 
 		</p:panelGrid>
 	</h:form>

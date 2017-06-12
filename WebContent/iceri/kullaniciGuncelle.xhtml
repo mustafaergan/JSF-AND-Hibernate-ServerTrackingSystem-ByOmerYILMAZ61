@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Insert title here</title>
+</h:head>
+<h:body>
+	<ui:include src="menu.xhtml" />
+
+	<h:form id="form">
+
+		<p:growl id="msgs" showDetail="true" />
+
+		<p:dataTable id="KullaniciListele" var="kullanici"
+			value="#{kullaniciBean.kulList()}" editable="true"
+			style="margin-bottom:20px">
+			<f:facet name="header">
+           Row Editing
+       		</f:facet>
+
+			<p:ajax event="rowEdit" listener="#{kullaniciBean.onRowEdit}"
+				update=":form:msgs" />
+			<p:ajax event="rowEditCancel" listener="#{kullaniciBean.onRowCancel}"
+				update=":form:msgs" />
+
+			<p:column headerText="Id">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{kullanici.id}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="modelInput" value="#{kullanici.id}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Name">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{kullanici.kullaniciAdi}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{kullanici.kullaniciAdi}" style="width:96%"
+							label="name" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Personel ismi">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{kullanici.personel.name}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{kullanici.personel.name}" style="width:96%"
+							label="name" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Roller">
+				<p:cellEditor>
+					<f:facet name="output">
+						<ui:repeat var="rol" value="#{kullanici.rol}" > 
+							<h:outputText value="#{rol.name}" />,
+						</ui:repeat>
+					</f:facet>
+					<f:facet name="input">
+						<p:selectCheckboxMenu id="menu"
+							value="#{kullaniciBean.degistirilcekRols}"
+							converter="RolConverter" label="Roller" filter="true"
+							filterMatchMode="startsWith" panelStyle="width:250px">
+							<f:selectItems value="#{kullaniciBean.rolList}" var="rol"
+								itemLabel="#{rol.name}" itemValue="#{rol}" />
+						</p:selectCheckboxMenu>
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column style="width:32px">
+				<p:rowEditor />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+
+</h:body>
+</html>

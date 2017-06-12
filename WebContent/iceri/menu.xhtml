@@ -12,22 +12,25 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-	<h:form>
+	<h:form id="menu"> 
 		<p:growl autoUpdate="true" />
 		<p:menubar orientation="horizonal" style="margin-top:20px">
-			<p:submenu label="Kullanici" icon="ui-icon-check">
+			<p:submenu label="Kullanici" icon="ui-icon-check"
+				rendered="#{loginBean.adminMi()}">
 
 				<p:menuitem value="Kullanici Listele" url="kullaniciListele.xhtml" />
 				<p:separator />
 				<p:menuitem value="Kullanici Ekle" url="kullaniciEkle.xhtml" />
 				<p:separator />
-				<p:menuitem value="kullanici sil" url="#" />
+				<p:menuitem value="kullanici Güncelle" url="kullaniciGuncelle.xhtml" />
 
 			</p:submenu>
 
 			<p:submenu label="Sunucu" icon="ui-icon-check">
 
-				<p:menuitem value="Sunucu ekle" url="#" />
+				<p:menuitem value="Sunucu Listele" url="sunucuListele.xhtml" />
+				<p:separator />
+				<p:menuitem value="Sunucu ekle" url="sunucuEkle.xhtml" />
 				<p:separator />
 				<p:menuitem value="Sunucu sil" url="#" />
 
@@ -40,6 +43,11 @@
 
 
 			</p:submenu>
+
+			<f:facet name="options">
+				<p:inputText style="margin-right:10px" placeholder="Search" />
+				<p:commandButton value="Çıkış Yap" icon="ui-icon-extlink" action="#{loginBean.cikisYap()}"/>
+			</f:facet>
 
 		</p:menubar>
 

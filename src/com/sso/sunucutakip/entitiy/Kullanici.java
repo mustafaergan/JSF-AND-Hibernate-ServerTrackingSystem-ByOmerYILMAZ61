@@ -26,7 +26,7 @@ public class Kullanici {
 	@Column(name = "sifre")
 	private String sifre;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name="kullanici_rol",joinColumns= @JoinColumn(name = "kullanici_id"),
 						inverseJoinColumns = @JoinColumn(name = "rol_id"))
 	private  List<Rol>  rol;

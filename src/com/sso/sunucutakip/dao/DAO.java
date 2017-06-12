@@ -14,6 +14,7 @@ import com.sso.sunucutakip.entitiy.GirisEntity;
 import com.sso.sunucutakip.entitiy.Kullanici;
 import com.sso.sunucutakip.entitiy.Personel;
 import com.sso.sunucutakip.entitiy.Rol;
+import com.sso.sunucutakip.entitiy.Sunucu;
 
 public class DAO {
 
@@ -149,6 +150,78 @@ public class DAO {
 			session.close();
 		}
 		
+	}
+
+	public List<Personel> getPersonelList() {
+		Session session = sessionFactory.openSession();
+
+		Criteria criteria = session.createCriteria(Personel.class);
+
+		List<Personel> list = criteria.list();
+		
+		return list;
+	}
+
+	public void sunucuEkle(Sunucu sunucuAdd) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try {
+
+			tx = session.beginTransaction();
+			session.save(sunucuAdd);
+			tx.commit();
+
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+	}
+
+	public List<Sunucu> getSunucuList() {
+		Session session = sessionFactory.openSession();
+
+		Criteria criteria = session.createCriteria(Sunucu.class);
+		
+		List<Sunucu> list = criteria.list();
+		
+		return list;
+	}
+
+	public void updateKullanici(Kullanici object) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try {
+
+			tx = session.beginTransaction();
+			session.merge(object);
+			tx.commit();
+
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+		
+	}
+
+	public List<Sunucu> getSunucuList(Kullanici kullanici) {
+		Session session = sessionFactory.openSession();
+
+		Criteria criteria = session.createCriteria(Sunucu.class);
+		
+		criteria.add(Restrictions.eq("kullaniciAdi", kullanici.getKullaniciAdi()));
+		
+		
+		List<Sunucu> list = criteria.list();
+		
+		return list;
 	}
 
 	

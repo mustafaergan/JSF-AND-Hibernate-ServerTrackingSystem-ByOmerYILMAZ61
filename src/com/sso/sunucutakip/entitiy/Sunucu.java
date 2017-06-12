@@ -10,7 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Sunucu {
@@ -22,7 +24,7 @@ public class Sunucu {
 	@Column(name = "name",unique=true)
 	private String name;
 	
-	@OneToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name="sunucu_personel",joinColumns= @JoinColumn(name = "sunucu_id"),
 			inverseJoinColumns = @JoinColumn(name = "personel_id"))
 	
@@ -42,6 +44,9 @@ public class Sunucu {
 	
 	@Column(name = "Aciklama")
 	private String aciklama;
+	
+	@OneToOne
+	private Personel sorumlandiranKisi;
 
 	public int getId() {
 		return id;
@@ -105,6 +110,15 @@ public class Sunucu {
 
 	public void setAciklama(String aciklama) {
 		this.aciklama = aciklama;
+	}
+
+	public Personel getSorumlandiranKisi() {
+		return sorumlandiranKisi;
+	}
+
+
+	public void setSorumlandiranKisi(Personel sorumlandiranKisi) {
+		this.sorumlandiranKisi = sorumlandiranKisi;
 	}
 	
 	
