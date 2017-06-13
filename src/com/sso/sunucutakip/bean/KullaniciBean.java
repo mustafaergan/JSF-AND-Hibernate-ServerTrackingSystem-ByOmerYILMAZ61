@@ -84,18 +84,6 @@ public class KullaniciBean implements Serializable {
 		
 	}
 
-	public List<Kullanici> kulList() {
-		String kontrol = null;
-		List<Kullanici> list = new ArrayList<>();
-		for (int i = 0; i < this.kullaniciList.size(); i++) {
-			if (kontrol != this.kullaniciList.get(i).getKullaniciAdi()) {
-				kontrol = this.kullaniciList.get(i).getKullaniciAdi();
-				list.add(this.kullaniciList.get(i));
-			}
-		}
-		return list;
-	}
-
 	public void rolSil() {
 
 		DAO.getInstance().rolSil(secilenRol);
