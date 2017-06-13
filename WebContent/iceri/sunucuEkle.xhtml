@@ -9,7 +9,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Insert title here</title>
 </h:head>
-<h:body>
+<h:body >
+
+	
 	<ui:include src="menu.xhtml" />
 
 	<h:form id="sunucu">
@@ -41,7 +43,7 @@
 			<p:inputText value="#{sunucuBean.sunucuAdd.rdpAdresi}" />
 
 			<p:panelGrid columns="1">
-			<p:inputTextarea rows="5" cols="30" counter="display" maxlength="10"
+			<p:inputTextarea rows="5" cols="30" counter="display" maxlength="50"
 				counterTemplate="{0} characters remaining." autoResize="false"
 				value="${sunucuBean.sunucuAdd.aciklama}" />
 			<h:outputText id="display" />

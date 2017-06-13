@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Insert title here</title>
+</h:head>
+<h:body>
+	<ui:include src="menu.xhtml" />
+
+	<h:form id="sunucuSil">
+
+		<p:growl id="msgs" showDetail="true" />
+
+		<p:dataTable id="checkboxDT" var="sunucu"
+			value="#{sunucuBean.sunucuList}"
+			selection="#{sunucuBean.silinecekSunucuList}"
+			rowKey="#{sunucu.id}" style="margin-bottom:0">
+
+			<p:column selectionMode="multiple"
+				style="width:16px;text-align:center" />
+
+			<p:column headerText="Id">
+					<h:outputText value="#{sunucu.id}" />
+				</p:column>
+
+				<p:column headerText="name">
+					<h:outputText value="#{sunucu.name}" />
+				</p:column>
+
+				<p:column headerText="sorumluPersonel">
+
+					<ui:repeat var="per" value="#{sunucu.sorumluPersonel}">
+						<h:outputText value="#{per.name}" />,
+					
+					</ui:repeat>
+
+				</p:column>
+
+				<p:column headerText="ramMiktari">
+					<h:outputText value="#{sunucu.ramMiktari}" />
+				</p:column>
+
+
+				<p:column headerText="cpuMiktari">
+					<h:outputText value="#{sunucu.cpuMiktari}" />
+				</p:column>
+
+				<p:column headerText="isletimSistemi">
+					<h:outputText value="#{sunucu.isletimSistemi}" />
+				</p:column>
+
+				<p:column headerText="rdpAdresi">
+					<h:outputText value="#{sunucu.rdpAdresi}" />
+				</p:column>
+
+				<p:column headerText="aciklama">
+					<h:outputText value="#{sunucu.aciklama}" />
+				</p:column>
+
+				<p:column headerText="sorumlandiranKisi">
+					<h:outputText value="#{sunucu.sorumlandiranKisi.name}" />
+				</p:column>
+			<f:facet name="footer">
+				<p:commandButton update="sunucuSil" value="Sunuculari Sil"
+					action="#{sunucuBean.sunuculariSil()}" />
+			</f:facet>
+		</p:dataTable>
+
+	</h:form>
+</h:body>
+</html>

@@ -34,12 +34,9 @@ public class KullaniciBean implements Serializable {
 	private List<Kullanici> kullaniciList;
 	private List<Rol> degistirilcekRols;
 	private List<Personel> personelList;
-	
-	
-
 	private Kullanici kullaniciAdd;
 	private Personel personelAdd;
-
+	private List<Kullanici> silinecekKullanicilarList;
 
 	private static KullaniciBean uniqueInstance;
 
@@ -50,8 +47,7 @@ public class KullaniciBean implements Serializable {
 		}
 		return uniqueInstance;
 	}
-	
-	
+
 	@PostConstruct
 	public void init() {
 		this.degistirilcekRols = new ArrayList<>();
@@ -63,7 +59,8 @@ public class KullaniciBean implements Serializable {
 		this.kullaniciAdd = new Kullanici();
 		this.personelAdd = new Personel();
 		this.kullaniciList = DAO.getInstance().getKullaniciList();
-		this.personelList=DAO.getInstance().getPersonelList();
+		this.personelList = DAO.getInstance().getPersonelList();
+		this.silinecekKullanicilarList=new ArrayList<>();
 	}
 
 	public void rolEkle() {
@@ -75,13 +72,18 @@ public class KullaniciBean implements Serializable {
 
 	public void kullaniciEkle() {
 		DAO.getInstance().ekle(personelAdd);
-		this.personelList=DAO.getInstance().getPersonelList();
+		this.personelList = DAO.getInstance().getPersonelList();
 		kullaniciAdd.setPersonel(personelAdd);
 		kullaniciAdd.setRol(selectedRols);
 		DAO.getInstance().kullaniciEkle(kullaniciAdd);
 		this.kullaniciList = DAO.getInstance().getKullaniciList();
 		SunucuBean.getInstance().personelListDuzenle();
-		
+
+	}
+
+	public void kullaniciSil() {
+		DAO.getInstance().kullanicilariSil(silinecekKullanicilarList);
+		this.kullaniciList = DAO.getInstance().getKullaniciList();
 	}
 
 	public void rolSil() {
@@ -163,11 +165,14 @@ public class KullaniciBean implements Serializable {
 	}
 
 	public void onRowEdit(RowEditEvent event) {
-		
+
 		Kullanici kul = (Kullanici) event.getObject();
-		kul.setRol(degistirilcekRols);;
+		if (degistirilcekRols.size() != 0) {
+			kul.setRol(degistirilcekRols);
+		}
+		
 		DAO.getInstance().updateKullanici(kul);
-		this.kullaniciList=DAO.getInstance().getKullaniciList();
+		this.kullaniciList = DAO.getInstance().getKullaniciList();
 	}
 
 	public void onRowCancel(RowEditEvent event) {
@@ -178,10 +183,16 @@ public class KullaniciBean implements Serializable {
 	public List<Personel> getPersonelList() {
 		return personelList;
 	}
-	
+
 	public void setPersonelList(List<Personel> personelList) {
 		this.personelList = personelList;
 	}
-	
-	
+
+	public void setSilinecekKullanicilarList(List<Kullanici> silinecekKullanicilarList) {
+		this.silinecekKullanicilarList = silinecekKullanicilarList;
+	}
+
+	public List<Kullanici> getSilinecekKullanicilarList() {
+		return silinecekKullanicilarList;
+	}
 }

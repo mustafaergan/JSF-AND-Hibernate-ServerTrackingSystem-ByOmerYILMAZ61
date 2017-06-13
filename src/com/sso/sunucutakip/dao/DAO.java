@@ -70,7 +70,6 @@ public class DAO {
 			session.close();
 		}
 
-		
 	}
 
 	public List<Rol> rolListele() {
@@ -79,7 +78,7 @@ public class DAO {
 		Criteria criteria = session.createCriteria(Rol.class);
 
 		List<Rol> list = criteria.list();
-		
+
 		return list;
 
 	}
@@ -100,8 +99,7 @@ public class DAO {
 		} finally {
 			session.close();
 		}
-		
-		
+
 	}
 
 	public void ekle(Object obj) {
@@ -120,7 +118,7 @@ public class DAO {
 		} finally {
 			session.close();
 		}
-		
+
 	}
 
 	public List<Kullanici> getKullaniciList() {
@@ -129,7 +127,7 @@ public class DAO {
 		Criteria criteria = session.createCriteria(Kullanici.class);
 
 		List<Kullanici> list = criteria.list();
-		
+
 		return list;
 	}
 
@@ -149,7 +147,7 @@ public class DAO {
 		} finally {
 			session.close();
 		}
-		
+
 	}
 
 	public List<Personel> getPersonelList() {
@@ -158,7 +156,7 @@ public class DAO {
 		Criteria criteria = session.createCriteria(Personel.class);
 
 		List<Personel> list = criteria.list();
-		
+
 		return list;
 	}
 
@@ -178,16 +176,16 @@ public class DAO {
 		} finally {
 			session.close();
 		}
-		
+
 	}
 
 	public List<Sunucu> getSunucuList() {
 		Session session = sessionFactory.openSession();
 
 		Criteria criteria = session.createCriteria(Sunucu.class);
-		
+
 		List<Sunucu> list = criteria.list();
-		
+
 		return list;
 	}
 
@@ -207,25 +205,88 @@ public class DAO {
 		} finally {
 			session.close();
 		}
-		
-		
+
 	}
 
 	public List<Sunucu> getSunucuList(Kullanici kullanici) {
 		Session session = sessionFactory.openSession();
 
 		Criteria criteria = session.createCriteria(Sunucu.class);
-		
+
 		criteria.add(Restrictions.eq("kullaniciAdi", kullanici.getKullaniciAdi()));
-		
-		
+
 		List<Sunucu> list = criteria.list();
-		
+
 		return list;
 	}
 
-	
-	
-	
+	public void kullanicilariSil(List<Kullanici> silinecekKullanicilarList) {
+		Kullanici kullanici = new Kullanici();
+
+		for (int i = 0; i < silinecekKullanicilarList.size(); i++) {
+			kullanici.setId(silinecekKullanicilarList.get(i).getId());
+
+			Session session = sessionFactory.openSession();
+			Transaction tx = null;
+			try {
+
+				tx = session.beginTransaction();
+				session.delete(kullanici);
+				tx.commit();
+
+			} catch (HibernateException e) {
+				if (tx != null)
+					tx.rollback();
+				e.printStackTrace();
+			} finally {
+				session.close();
+			}
+		}
+
+	}
+
+	public void sunuculariSil(List<Sunucu> silinecekSunucuList) {
+		Sunucu sunucu = new Sunucu();
+
+		for (int i = 0; i < silinecekSunucuList.size(); i++) {
+			sunucu.setId(silinecekSunucuList.get(i).getId());
+
+			Session session = sessionFactory.openSession();
+			Transaction tx = null;
+			try {
+
+				tx = session.beginTransaction();
+				session.delete(sunucu);
+				tx.commit();
+
+			} catch (HibernateException e) {
+				if (tx != null)
+					tx.rollback();
+				e.printStackTrace();
+			} finally {
+				session.close();
+			}
+		}
+
+	}
+
+	public void updateSunucu(Sunucu sun) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try {
+
+			tx = session.beginTransaction();
+			session.merge(sun);
+			tx.commit();
+
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+	}
 
 }

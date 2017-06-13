@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Insert title here</title>
+</h:head>
+<h:body>
+	<ui:include src="menu.xhtml" />
+
+	<h:form id="kullaniciSil">
+
+		<p:growl id="msgs" showDetail="true" />
+
+		<p:dataTable id="checkboxDT" var="kullanici"
+			value="#{kullaniciBean.kullaniciList}"
+			selection="#{kullaniciBean.silinecekKullanicilarList}"
+			rowKey="#{kullanici.id}" style="margin-bottom:0">
+
+			<p:column selectionMode="multiple"
+				style="width:16px;text-align:center" />
+
+			<p:column headerText="Id">
+				<h:outputText value="#{kullanici.id}" />
+			</p:column>
+
+			<p:column headerText="Kullanici Adi">
+				<h:outputText value="#{kullanici.kullaniciAdi}" />
+			</p:column>
+
+			<p:column headerText="Personel İsmi">
+				<h:outputText value="#{kullanici.personel.name}" />
+			</p:column>
+			<p:column headerText="Roller">
+				<ui:repeat var="rol" value="#{kullanici.rol}">
+					<h:outputText value="#{rol.name}" />,
+					
+				</ui:repeat>
+			</p:column>
+			<f:facet name="footer">
+				<p:commandButton update="kullaniciSil" value="Kullanicilari Sil"
+					action="#{kullaniciBean.kullaniciSil()}" />
+			</f:facet>
+		</p:dataTable>
+
+	</h:form>
+</h:body>
+</html>

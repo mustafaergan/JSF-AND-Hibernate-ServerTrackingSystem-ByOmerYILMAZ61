@@ -45,7 +45,7 @@ public class KullaniciConverter implements Converter {
 
 	public String getAsString(FacesContext fc, UIComponent uic, Object object) {
         if(object != null) {
-            return String.valueOf(((Personel) object).getId());
+            return String.valueOf(((Kullanici) object).getId());
         }
         else {
             return null;

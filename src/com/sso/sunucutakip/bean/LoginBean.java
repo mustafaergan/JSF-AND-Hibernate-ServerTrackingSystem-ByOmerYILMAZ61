@@ -64,6 +64,10 @@ public class LoginBean implements Serializable {
 	
 
 	public boolean adminMi() {
+		if(kullanici==null){
+			return false;
+		}
+		
 		for (Kullanici kullanici : kullaniciList) {
 			if (kullanici.getId() == this.kullanici.getId()) {
 				for (Rol rol : kullanici.getRol()) {

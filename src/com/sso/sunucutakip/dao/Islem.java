@@ -15,7 +15,7 @@ public class Islem {
 		
 		Personel personel = new Personel();
 		personel.setId(1);
-		personel.setName("aqu");
+		personel.setName("admin");
 		
 		List<Rol> rolList = new ArrayList<>();
 		Rol rol = new Rol();
@@ -25,7 +25,7 @@ public class Islem {
 		
 		Kullanici kullanici = new Kullanici();
 		kullanici.setId(1);
-		kullanici.setKullaniciAdi("aqu");
+		kullanici.setKullaniciAdi("admin");
 		kullanici.setPersonel(personel);
 		kullanici.setRol(rolList);
 		kullanici.setSifre("123");

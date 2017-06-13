@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Insert title here</title>
+</h:head>
+<h:body>
+	<ui:include src="menu.xhtml" />
+
+	<h:form id="form">
+
+		<p:growl id="msgs" showDetail="true" />
+
+		<p:dataTable id="SunucuListele" var="sunucu"
+			value="#{sunucuBean.sunucuList}" editable="true"
+			style="margin-bottom:20px">
+			<f:facet name="header">
+           Row Editing
+       		</f:facet>
+
+			<p:ajax event="rowEdit" listener="#{sunucuBean.onRowEdit}"
+				update=":form:msgs" />
+			<p:ajax event="rowEditCancel" listener="#{sunucuBean.onRowCancel}"
+				update=":form:msgs" />
+
+			<p:column headerText="Id">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{sunucu.id}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="modelInput" value="#{sunucu.id}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Name">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{sunucu.name}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{sunucu.name}" style="width:96%" label="name" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+
+			<p:column headerText="Sorumlu Personeller">
+				<p:cellEditor>
+					<f:facet name="output">
+						<ui:repeat var="per" value="#{sunucu.sorumluPersonel}">
+							<h:outputText value="#{per.name}" />,
+						</ui:repeat>
+					</f:facet>
+					<f:facet name="input">
+						<p:selectCheckboxMenu id="menu"
+							value="#{sunucuBean.degistirilecekPersonels}"
+							converter="PersonelConverter" label="Personeller" filter="true"
+							filterMatchMode="startsWith" panelStyle="width:250px">
+							<f:selectItems value="#{sunucuBean.personelList}" var="per"
+								itemLabel="#{per.name}" itemValue="#{per}" />
+						</p:selectCheckboxMenu>
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Ram Miktari">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{sunucu.ramMiktari}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{sunucu.ramMiktari}" style="width:96%"
+							label="name" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="CPU Miktari">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{sunucu.cpuMiktari}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{sunucu.cpuMiktari}" style="width:96%"
+							label="name" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+
+
+			<p:column headerText="İşletim Sistemi">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{sunucu.isletimSistemi}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{sunucu.isletimSistemi}" style="width:96%"
+							label="name" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="RDP Adresi">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{sunucu.rdpAdresi}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{sunucu.rdpAdresi}" style="width:96%"
+							label="name" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Açıklama">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{sunucu.aciklama}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{sunucu.aciklama}" style="width:96%"
+							label="name" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Sorumlandiran Kişi">
+				<p:cellEditor>
+					<f:facet name="output">
+									<h:outputText value="#{sunucu.sorumlandiranKisi.name}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:selectOneMenu id="advanced" value="#{sunucuBean.degistirilecekSorumlu}"
+							converter="PersonelConverter" panelStyle="width:180px" effect="fade"
+							var="t" style="width:160px" filter="true"
+							filterMatchMode="startsWith">
+							
+							<f:selectItems value="#{sunucuBean.personelList}" var="per"
+								itemLabel="#{per.name}" itemValue="#{per}" />
+
+							<p:column>
+								<h:outputText value="#{t.name}" />
+							</p:column>
+							
+						</p:selectOneMenu>
+
+						<!-- 						<p:inputText value="#{sunucu.sorumlandiranKisi.name}" -->
+						<!-- 							style="width:96%" label="name" /> -->
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column style="width:32px">
+				<p:rowEditor />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+
+</h:body>
+</html>

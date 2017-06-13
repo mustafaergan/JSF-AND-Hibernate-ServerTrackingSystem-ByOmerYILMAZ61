@@ -5,8 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
+import org.primefaces.event.RowEditEvent;
 
 import com.sso.sunucutakip.dao.DAO;
 import com.sso.sunucutakip.entitiy.Kullanici;
@@ -28,7 +32,10 @@ public class SunucuBean implements Serializable {
 	private List<Personel> selectedPersonels;
 	private List<Sunucu> gosterilcekList;
 	private List<Kullanici> kullaniciList;
-	
+	private List<Sunucu> silinecekSunucuList;
+	private List<Personel> degistirilecekPersonels;
+	private Personel degistirilecekSorumlu;
+
 	private static SunucuBean uniqueInstance;
 
 	public static SunucuBean getInstance() {
@@ -46,7 +53,11 @@ public class SunucuBean implements Serializable {
 		this.selectedPersonels = new ArrayList<>();
 		this.sunucuList = DAO.getInstance().getSunucuList();
 		this.gosterilcekList = new ArrayList<>();
-		this.kullaniciList=DAO.getInstance().getKullaniciList();
+		this.kullaniciList = DAO.getInstance().getKullaniciList();
+		this.silinecekSunucuList = new ArrayList<>();
+		this.degistirilecekPersonels = new ArrayList<>();
+		this.degistirilecekSorumlu = new Personel();
+
 	}
 
 	public void sunucuEkle() {
@@ -57,26 +68,30 @@ public class SunucuBean implements Serializable {
 
 	}
 
+	public void sunuculariSil() {
+		DAO.getInstance().sunuculariSil(this.silinecekSunucuList);
+		this.sunucuList = DAO.getInstance().getSunucuList();
+	}
+
 	public List<Sunucu> gosterilcekList() {
 
 		Kullanici kullanici = kullaniciVer(LoginBean.getInstance().getKullanici());
-		
+
 		for (Rol rol : kullanici.getRol()) {
 			if (rol.getName().equals("admin")) {
 				return sunucuList;
 			}
 		}
 		for (Sunucu sunucu : sunucuList) {
-			for (int i = 0; i < sunucu.getSorumluPersonel().size() ; i++) {
-				if(sunucu.getSorumluPersonel().get(i).getId()==kullanici.getPersonel().getId()){
+			for (int i = 0; i < sunucu.getSorumluPersonel().size(); i++) {
+				if (sunucu.getSorumluPersonel().get(i).getId() == kullanici.getPersonel().getId()) {
 					this.gosterilcekList.add(sunucu);
 				}
 			}
 		}
 		return this.gosterilcekList;
 	}
-	
-	
+
 	private Kullanici kullaniciVer(Kullanici kullanici) {
 		for (Kullanici kul : this.kullaniciList) {
 			if (kul.getId() == kullanici.getId()) {
@@ -85,20 +100,6 @@ public class SunucuBean implements Serializable {
 		}
 		return null;
 	}
-
-	public List<Sunucu> sunList(List<Sunucu> gosterilcekList) {
-		String kontrol = null;
-		List<Sunucu> list = new ArrayList<>();
-		for (int i = 0; i < gosterilcekList.size(); i++) {
-			if (kontrol != gosterilcekList.get(i).getName()) {
-				kontrol = gosterilcekList.get(i).getName();
-				list.add(gosterilcekList.get(i));
-			}
-		}
-		return list;
-	}
-	
-	
 
 	public Sunucu getSunucuAdd() {
 		return sunucuAdd;
@@ -133,8 +134,52 @@ public class SunucuBean implements Serializable {
 	}
 
 	public void personelListDuzenle() {
-		this.personelList=DAO.getInstance().getPersonelList();
-		
+		this.personelList = DAO.getInstance().getPersonelList();
+
 	}
- 
+
+	public List<Sunucu> getSilinecekSunucuList() {
+		return silinecekSunucuList;
+	}
+
+	public void setSilinecekSunucuList(List<Sunucu> silinecekSunucuList) {
+		this.silinecekSunucuList = silinecekSunucuList;
+	}
+
+	public void onRowEdit(RowEditEvent event) {
+
+		Sunucu sun = (Sunucu) event.getObject();
+		if (degistirilecekPersonels.size() != 0) {
+			sun.setSorumluPersonel(degistirilecekPersonels);
+		}
+		
+		if (degistirilecekSorumlu.getName() != null) {
+			sun.setSorumlandiranKisi(degistirilecekSorumlu);
+		}
+		
+		DAO.getInstance().updateSunucu(sun);
+		this.sunucuList = DAO.getInstance().getSunucuList();
+	}
+
+	public void onRowCancel(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Edit Cancelled", ((Sunucu) event.getObject()).getName());
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+
+	public void setDegistirilecekPersonels(List<Personel> degistirilecekPersonels) {
+		this.degistirilecekPersonels = degistirilecekPersonels;
+	}
+
+	public List<Personel> getDegistirilecekPersonels() {
+		return degistirilecekPersonels;
+	}
+
+	public void setDegistirilecekSorumlu(Personel degistirilecekSorumlu) {
+		this.degistirilecekSorumlu = degistirilecekSorumlu;
+	}
+
+	public Personel getDegistirilecekSorumlu() {
+		return degistirilecekSorumlu;
+	}
+
 }
