@@ -172,7 +172,7 @@ public class SunucuBean implements Serializable {
 
 	public List<Personel> getDegistirilecekPersonels() {
 		return degistirilecekPersonels;
-	}
+	}	
 
 	public void setDegistirilecekSorumlu(Personel degistirilecekSorumlu) {
 		this.degistirilecekSorumlu = degistirilecekSorumlu;
