@@ -38,10 +38,9 @@
 
 			<!-- 				</p:selectManyMenu> -->
 
-			<p:selectCheckboxMenu id="menu"
-				value="#{kullaniciBean.selectedRols}" converter="RolConverter"
-				label="Roller" filter="true" filterMatchMode="startsWith"
-				panelStyle="width:250px">
+			<p:selectCheckboxMenu id="menu" value="#{kullaniciBean.selectedRols}"
+				converter="RolConverter" label="Roller" filter="true"
+				filterMatchMode="startsWith" panelStyle="width:250px">
 				<f:selectItems value="#{kullaniciBean.rolList}" var="rol"
 					itemLabel="#{rol.name}" itemValue="#{rol}" />
 			</p:selectCheckboxMenu>
@@ -49,9 +48,8 @@
 
 			<h:outputText></h:outputText>
 			<p:commandButton value="Kullanici Ekle"
-				action="#{kullaniciBean.kullaniciEkle()}" update="kullanici"></p:commandButton>
-
-
+				action="#{kullaniciBean.kullaniciEkle()}"
+				update="kullanici"></p:commandButton>
 
 		</p:panelGrid>
 	</h:form>

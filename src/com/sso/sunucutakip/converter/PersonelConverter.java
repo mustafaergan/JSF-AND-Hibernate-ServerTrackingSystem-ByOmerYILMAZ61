@@ -20,7 +20,7 @@ public class PersonelConverter implements Converter {
     public Object getAsObject(FacesContext fc, UIComponent uic, String value) {
         if(value != null && value.trim().length() > 0) {
             try {
-                SunucuBean service = (SunucuBean) fc.getExternalContext().getSessionMap().get("sunucuBean");
+            	KullaniciBean service = (KullaniciBean) fc.getExternalContext().getSessionMap().get("kullaniciBean");
                 int id = Integer.parseInt(value);
                 service.getPersonelList();
                 return  getMyRol(id, service.getPersonelList());

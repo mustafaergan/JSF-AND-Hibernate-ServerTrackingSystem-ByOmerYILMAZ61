@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.RowEditEvent;
@@ -28,7 +29,6 @@ public class SunucuBean implements Serializable {
 
 	private Sunucu sunucuAdd;
 	private List<Sunucu> sunucuList;
-	private List<Personel> personelList;
 	private List<Personel> selectedPersonels;
 	private List<Sunucu> gosterilcekList;
 	private List<Kullanici> kullaniciList;
@@ -49,7 +49,6 @@ public class SunucuBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		this.sunucuAdd = new Sunucu();
-		this.personelList = DAO.getInstance().getPersonelList();
 		this.selectedPersonels = new ArrayList<>();
 		this.sunucuList = DAO.getInstance().getSunucuList();
 		this.gosterilcekList = new ArrayList<>();
@@ -109,13 +108,6 @@ public class SunucuBean implements Serializable {
 		this.sunucuAdd = sunucuAdd;
 	}
 
-	public List<Personel> getPersonelList() {
-		return personelList;
-	}
-
-	public void setPersonelList(List<Personel> personelList) {
-		this.personelList = personelList;
-	}
 
 	public List<Personel> getSelectedPersonels() {
 		return selectedPersonels;
@@ -133,10 +125,6 @@ public class SunucuBean implements Serializable {
 		return sunucuList;
 	}
 
-	public void personelListDuzenle() {
-		this.personelList = DAO.getInstance().getPersonelList();
-
-	}
 
 	public List<Sunucu> getSilinecekSunucuList() {
 		return silinecekSunucuList;

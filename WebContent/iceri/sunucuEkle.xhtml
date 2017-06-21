@@ -9,24 +9,25 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Insert title here</title>
 </h:head>
-<h:body >
+<h:body>
 
-	
 	<ui:include src="menu.xhtml" />
 
-	<h:form id="sunucu">
+	<h:form id="sunucuEkle">
 
 		<p:panelGrid columns="2">
 			<h:outputText value="Sunucu Adi" />
 			<p:inputText value="#{sunucuBean.sunucuAdd.name}" />
 
 			<h:outputText value="Sorumlu Personeller" />
-			
+
 			<p:selectCheckboxMenu value="#{sunucuBean.selectedPersonels}"
 				converter="PersonelConverter" label="Personeller" filter="true"
 				filterMatchMode="startsWith" panelStyle="width:250px">
-				<f:selectItems value="#{sunucuBean.personelList}" var="personel"
+
+				<f:selectItems value="#{kullaniciBean.personelList}" var="personel"
 					itemLabel="#{personel.name}" itemValue="#{personel}" />
+
 			</p:selectCheckboxMenu>
 
 
@@ -43,14 +44,14 @@
 			<p:inputText value="#{sunucuBean.sunucuAdd.rdpAdresi}" />
 
 			<p:panelGrid columns="1">
-			<p:inputTextarea rows="5" cols="30" counter="display" maxlength="50"
-				counterTemplate="{0} characters remaining." autoResize="false"
-				value="${sunucuBean.sunucuAdd.aciklama}" />
-			<h:outputText id="display" />
+				<p:inputTextarea rows="5" cols="30" counter="display" maxlength="50"
+					counterTemplate="{0} characters remaining." autoResize="false"
+					value="${sunucuBean.sunucuAdd.aciklama}" />
+				<h:outputText id="display" />
 			</p:panelGrid>
-			
+
 			<p:commandButton value="Sunucu Ekle"
-				action="#{sunucuBean.sunucuEkle()}" update="sunucu"></p:commandButton>
+				action="#{sunucuBean.sunucuEkle()}" update="sunucuEkle"></p:commandButton>
 
 
 		</p:panelGrid>

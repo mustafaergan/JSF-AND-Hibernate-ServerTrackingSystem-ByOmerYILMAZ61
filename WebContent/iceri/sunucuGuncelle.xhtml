@@ -64,7 +64,7 @@
 							value="#{sunucuBean.degistirilecekPersonels}"
 							converter="PersonelConverter" label="Personeller" filter="true"
 							filterMatchMode="startsWith" panelStyle="width:250px">
-							<f:selectItems value="#{sunucuBean.personelList}" var="per"
+							<f:selectItems value="#{kullaniciBean.personelList}" var="per"
 								itemLabel="#{per.name}" itemValue="#{per}" />
 						</p:selectCheckboxMenu>
 					</f:facet>
@@ -144,7 +144,7 @@
 							var="t" style="width:160px" filter="true"
 							filterMatchMode="startsWith">
 							
-							<f:selectItems value="#{sunucuBean.personelList}" var="per"
+							<f:selectItems value="#{kullaniciBean.personelList}" var="per"
 								itemLabel="#{per.name}" itemValue="#{per}" />
 
 							<p:column>

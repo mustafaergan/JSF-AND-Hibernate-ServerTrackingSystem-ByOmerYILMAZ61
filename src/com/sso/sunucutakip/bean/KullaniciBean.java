@@ -9,6 +9,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.CellEditEvent;
@@ -77,7 +78,6 @@ public class KullaniciBean implements Serializable {
 		kullaniciAdd.setRol(selectedRols);
 		DAO.getInstance().kullaniciEkle(kullaniciAdd);
 		this.kullaniciList = DAO.getInstance().getKullaniciList();
-		SunucuBean.getInstance().personelListDuzenle();
 
 	}
 
