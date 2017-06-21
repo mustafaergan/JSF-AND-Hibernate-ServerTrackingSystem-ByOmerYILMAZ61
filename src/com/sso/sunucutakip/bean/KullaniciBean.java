@@ -51,7 +51,7 @@ public class KullaniciBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		this.degistirilcekRols = new ArrayList<>();
+		
 		this.rolList = DAO.getInstance().rolListele();
 		this.rolAdd = new Rol();
 		this.secilenRol = new Rol();
@@ -62,6 +62,8 @@ public class KullaniciBean implements Serializable {
 		this.kullaniciList = DAO.getInstance().getKullaniciList();
 		this.personelList = DAO.getInstance().getPersonelList();
 		this.silinecekKullanicilarList=new ArrayList<>();
+		this.degistirilcekRols = new ArrayList<>();
+				
 	}
 
 	public void rolEkle() {
@@ -170,7 +172,6 @@ public class KullaniciBean implements Serializable {
 		if (degistirilcekRols.size() != 0) {
 			kul.setRol(degistirilcekRols);
 		}
-		
 		DAO.getInstance().updateKullanici(kul);
 		this.kullaniciList = DAO.getInstance().getKullaniciList();
 	}
@@ -179,7 +180,9 @@ public class KullaniciBean implements Serializable {
 		FacesMessage msg = new FacesMessage("Edit Cancelled", ((Kullanici) event.getObject()).getKullaniciAdi());
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
-
+	
+	
+	
 	public List<Personel> getPersonelList() {
 		return personelList;
 	}

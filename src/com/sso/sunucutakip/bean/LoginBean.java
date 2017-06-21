@@ -42,6 +42,9 @@ public class LoginBean implements Serializable {
 		this.girisEntity = new GirisEntity();
 		this.kullaniciList = DAO.getInstance().getKullaniciList();
 	}
+	
+
+	
 
 	public String login() {
 

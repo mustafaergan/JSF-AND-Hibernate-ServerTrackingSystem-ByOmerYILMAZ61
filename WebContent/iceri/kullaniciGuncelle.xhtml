@@ -67,15 +67,20 @@
 			<p:column headerText="Roller">
 				<p:cellEditor>
 					<f:facet name="output">
-						<ui:repeat var="rol" value="#{kullanici.rol}" > 
+					
+						<ui:repeat var="rol" value="#{kullanici.rol}">
 							<h:outputText value="#{rol.name}" />,
 						</ui:repeat>
 					</f:facet>
 					<f:facet name="input">
-						<p:selectCheckboxMenu id="menu"
-							value="#{kullaniciBean.degistirilcekRols}"
+					
+						<p:selectCheckboxMenu id="roll" 
 							converter="RolConverter" label="Roller" filter="true"
-							filterMatchMode="startsWith" panelStyle="width:250px">
+							filterMatchMode="startsWith" panelStyle="width:250px" 
+							value="#{kullaniciBean.degistirilcekRols}"  >
+							
+							<f:attribute name="collectionType" value="java.util.ArrayList"/>
+							
 							<f:selectItems value="#{kullaniciBean.rolList}" var="rol"
 								itemLabel="#{rol.name}" itemValue="#{rol}" />
 						</p:selectCheckboxMenu>
