@@ -60,7 +60,7 @@ public class KullaniciBean implements Serializable {
 		this.kullaniciAdd = new Kullanici();
 		this.personelAdd = new Personel();
 		this.kullaniciList = DAO.getInstance().getKullaniciList();
-		this.personelList = DAO.getInstance().getPersonelList();
+		this.personelList = DAO.getInstance().personelListele();
 		this.silinecekKullanicilarList=new ArrayList<>();
 		this.degistirilcekRols = new ArrayList<>();
 				
@@ -75,7 +75,7 @@ public class KullaniciBean implements Serializable {
 
 	public String kullaniciEkle() {
 		DAO.getInstance().ekle(personelAdd);
-		this.personelList = DAO.getInstance().getPersonelList();
+		this.personelList = DAO.getInstance().personelListele();
 		kullaniciAdd.setPersonel(personelAdd);
 		kullaniciAdd.setRol(selectedRols);
 		DAO.getInstance().kullaniciEkle(kullaniciAdd);

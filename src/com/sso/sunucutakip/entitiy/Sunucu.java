@@ -1,6 +1,5 @@
 package com.sso.sunucutakip.entitiy;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -24,11 +23,11 @@ public class Sunucu {
 	@Column(name = "name",unique=true)
 	private String name;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name="sunucu_personel",joinColumns= @JoinColumn(name = "sunucu_id"),
 			inverseJoinColumns = @JoinColumn(name = "personel_id"))
 	
-	private List<Personel> sorumluPersonel = new ArrayList<>();
+	private List<Personel> sorumluPersonel;
 	
 	@Column(name = "Ram_Miktari")
 	private int ramMiktari;

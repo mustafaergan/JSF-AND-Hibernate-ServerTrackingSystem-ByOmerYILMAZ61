@@ -151,7 +151,7 @@ public class DAO {
 
 	}
 
-	public List<Personel> getPersonelList() {
+	public List<Personel> personelListele() {
 		Session session = sessionFactory.openSession();
 
 		Criteria criteria = session.createCriteria(Personel.class);
@@ -188,7 +188,6 @@ public class DAO {
 
 		List<Sunucu> list = criteria.list();
 
-		session.close();
 		return list;
 	}
 

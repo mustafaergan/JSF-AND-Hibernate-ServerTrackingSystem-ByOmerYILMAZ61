@@ -22,13 +22,13 @@
 					<h:outputText value="#{sunucu.id}" />
 				</p:column>
 
-				<p:column headerText="name">
+				<p:column headerText="name" >
 					<h:outputText value="#{sunucu.name}" />
 				</p:column>
 
-				<p:column headerText="sorumluPersonel">
+				<p:column headerText="sorumluPersonel"  >
 
-					<ui:repeat var="per" value="#{sunucu.sorumluPersonel}">
+					<ui:repeat var="per" value="#{sunucu.sorumluPersonel}" >
 						<h:outputText value="#{per.name}" />,
 					
 					</ui:repeat>
