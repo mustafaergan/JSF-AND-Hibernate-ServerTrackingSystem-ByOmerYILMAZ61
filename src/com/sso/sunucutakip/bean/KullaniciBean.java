@@ -73,13 +73,14 @@ public class KullaniciBean implements Serializable {
 		this.rolList = DAO.getInstance().rolListele();
 	}
 
-	public void kullaniciEkle() {
+	public String kullaniciEkle() {
 		DAO.getInstance().ekle(personelAdd);
 		this.personelList = DAO.getInstance().getPersonelList();
 		kullaniciAdd.setPersonel(personelAdd);
 		kullaniciAdd.setRol(selectedRols);
 		DAO.getInstance().kullaniciEkle(kullaniciAdd);
 		this.kullaniciList = DAO.getInstance().getKullaniciList();
+		return "kullaniciListele.xhtml";
 
 	}
 

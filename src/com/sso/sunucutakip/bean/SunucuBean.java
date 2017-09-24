@@ -59,11 +59,12 @@ public class SunucuBean implements Serializable {
 
 	}
 
-	public void sunucuEkle() {
+	public String sunucuEkle() {
 		this.sunucuAdd.setSorumluPersonel(this.selectedPersonels);
 		this.sunucuAdd.setSorumlandiranKisi(LoginBean.getInstance().getKullanici().getPersonel());
 		DAO.getInstance().sunucuEkle(this.sunucuAdd);
 		this.sunucuList = DAO.getInstance().getSunucuList();
+		return "sunucuListele.xhtml";
 
 	}
 

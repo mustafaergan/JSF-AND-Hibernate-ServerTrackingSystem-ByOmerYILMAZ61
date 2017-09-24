@@ -79,6 +79,7 @@ public class DAO {
 
 		List<Rol> list = criteria.list();
 
+		session.close();
 		return list;
 
 	}
@@ -128,6 +129,7 @@ public class DAO {
 
 		List<Kullanici> list = criteria.list();
 
+		session.close();
 		return list;
 	}
 
@@ -157,6 +159,7 @@ public class DAO {
 
 		List<Personel> list = criteria.list();
 
+		session.close();
 		return list;
 	}
 
@@ -186,6 +189,7 @@ public class DAO {
 
 		List<Sunucu> list = criteria.list();
 
+		session.close();
 		return list;
 	}
 
@@ -217,6 +221,7 @@ public class DAO {
 
 		List<Sunucu> list = criteria.list();
 
+		session.close();
 		return list;
 	}
 
