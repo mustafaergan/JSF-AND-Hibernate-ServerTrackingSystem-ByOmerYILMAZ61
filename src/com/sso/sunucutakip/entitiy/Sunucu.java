@@ -24,7 +24,7 @@ public class Sunucu {
 	@Column(name = "name",unique=true)
 	private String name;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="sunucu_personel",joinColumns= @JoinColumn(name = "sunucu_id"),
 			inverseJoinColumns = @JoinColumn(name = "personel_id"))
 	

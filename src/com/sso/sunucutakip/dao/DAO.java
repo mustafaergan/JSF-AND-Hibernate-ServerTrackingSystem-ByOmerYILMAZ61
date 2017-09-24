@@ -129,7 +129,6 @@ public class DAO {
 
 		List<Kullanici> list = criteria.list();
 
-		session.close();
 		return list;
 	}
 
