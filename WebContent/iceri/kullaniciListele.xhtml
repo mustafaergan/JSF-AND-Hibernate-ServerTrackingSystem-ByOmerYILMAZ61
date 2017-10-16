@@ -13,9 +13,9 @@
 	<ui:include src="menu.xhtml" />
 
 	<h:form>
-		<p:dataTable id="tblkullanici" var="kullanici"
+		<p:dataTable id="tblkullanici" var="kullanici" 
 			value="#{kullaniciBean.kullaniciList}">
-			<p:column headerText="Id">
+			<p:column headerText="Id" >
 				<h:outputText value="#{kullanici.id}" />
 			</p:column>
 

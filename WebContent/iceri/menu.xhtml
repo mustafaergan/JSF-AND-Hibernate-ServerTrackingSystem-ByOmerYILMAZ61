@@ -34,15 +34,15 @@
 				<p:separator />
 				<p:menuitem value="Sunucu ekle" url="sunucuEkle.xhtml" />
 				<p:separator />
-				<p:menuitem value="Sunucu Guncelle" url="sunucuGuncelle.xhtml" />
+				<p:menuitem value="Sunucu Guncelle" url="sunucuGuncelle.xhtml" rendered="#{loginBean.adminMi()}"/>
 				<p:separator />
-				<p:menuitem value="Sunucu sil" url="sunuculariSil.xhtml" />
+				<p:menuitem value="Sunucu sil" url="sunuculariSil.xhtml" rendered="#{loginBean.adminMi()}"/>
 
 			</p:submenu>
 
 			<p:submenu label="Rol" icon="ui-icon-check">
 
-				<p:menuitem value="Roller" url="rollistele.xhtml" />
+				<p:menuitem value="Roller" url="rollistele.xhtml" rendered="#{loginBean.adminMi()}"/>
 				<p:separator />
 
 

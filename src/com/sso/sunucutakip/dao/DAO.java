@@ -2,13 +2,17 @@ package com.sso.sunucutakip.dao;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 
 import com.sso.sunucutakip.entitiy.GirisEntity;
 import com.sso.sunucutakip.entitiy.Kullanici;
@@ -38,18 +42,19 @@ public class DAO {
 		Kullanici kullanici = null;
 		Session session = sessionFactory.openSession();
 
-		Criteria criteria = session.createCriteria(Kullanici.class);
+		CriteriaBuilder cb = session.getCriteriaBuilder();
+		CriteriaQuery<Kullanici> cq = cb.createQuery(Kullanici.class);
+		Root<Kullanici> kullaniciRoot = cq.from(Kullanici.class);
 
-		criteria.add(Restrictions.eq("kullaniciAdi", girisEntity.getUserName()));
+		Predicate kulPre = cb.and(cb.equal(kullaniciRoot.get("kullaniciAdi"), girisEntity.getUserName()),
+				cb.equal(kullaniciRoot.get("sifre"), girisEntity.getPassWord()));
+        cq.where(kulPre);
 
-		criteria.add(Restrictions.eq("sifre", girisEntity.getPassWord()));
+		Query<Kullanici> q = session.createQuery(cq);
 
-		List<Kullanici> list = criteria.list();
-
-		if (list.size() > 0)
-			kullanici = list.get(0);
+		kullanici = q.getSingleResult();
+		
 		session.close();
-
 		return kullanici;
 	}
 
@@ -75,9 +80,9 @@ public class DAO {
 	public List<Rol> rolListele() {
 		Session session = sessionFactory.openSession();
 
-		Criteria criteria = session.createCriteria(Rol.class);
-
-		List<Rol> list = criteria.list();
+		CriteriaQuery<Rol> cq = session.getCriteriaBuilder().createQuery(Rol.class);
+		cq.from(Rol.class);
+		List<Rol> list = session.createQuery(cq).getResultList();
 
 		session.close();
 		return list;
@@ -125,10 +130,11 @@ public class DAO {
 	public List<Kullanici> getKullaniciList() {
 		Session session = sessionFactory.openSession();
 
-		Criteria criteria = session.createCriteria(Kullanici.class);
+		CriteriaQuery<Kullanici> cq = session.getCriteriaBuilder().createQuery(Kullanici.class);
+		cq.from(Kullanici.class);
+		List<Kullanici> list = session.createQuery(cq).getResultList();
 
-		List<Kullanici> list = criteria.list();
-
+		session.close();
 		return list;
 	}
 
@@ -154,9 +160,9 @@ public class DAO {
 	public List<Personel> personelListele() {
 		Session session = sessionFactory.openSession();
 
-		Criteria criteria = session.createCriteria(Personel.class);
-
-		List<Personel> list = criteria.list();
+		CriteriaQuery<Personel> cq = session.getCriteriaBuilder().createQuery(Personel.class);
+		cq.from(Personel.class);
+		List<Personel> list = session.createQuery(cq).getResultList();
 
 		session.close();
 		return list;
@@ -184,10 +190,11 @@ public class DAO {
 	public List<Sunucu> getSunucuList() {
 		Session session = sessionFactory.openSession();
 
-		Criteria criteria = session.createCriteria(Sunucu.class);
+		CriteriaQuery<Sunucu> cq = session.getCriteriaBuilder().createQuery(Sunucu.class);
+		cq.from(Sunucu.class);
+		List<Sunucu> list = session.createQuery(cq).getResultList();
 
-		List<Sunucu> list = criteria.list();
-
+		session.close();
 		return list;
 	}
 
@@ -213,11 +220,16 @@ public class DAO {
 	public List<Sunucu> getSunucuList(Kullanici kullanici) {
 		Session session = sessionFactory.openSession();
 
-		Criteria criteria = session.createCriteria(Sunucu.class);
+		CriteriaBuilder cb = session.getCriteriaBuilder();
+		CriteriaQuery<Sunucu> cq = cb.createQuery(Sunucu.class);
+		Root<Sunucu> kullaniciRoot = cq.from(Sunucu.class);
 
-		criteria.add(Restrictions.eq("kullaniciAdi", kullanici.getKullaniciAdi()));
+		Predicate sunucuPre = cb.equal(kullaniciRoot.get("kullaniciAdi"), kullanici.getKullaniciAdi());
+        cq.where(sunucuPre);
 
-		List<Sunucu> list = criteria.list();
+		Query<Sunucu> q = session.createQuery(cq);
+
+		List<Sunucu> list = q.getResultList();
 
 		session.close();
 		return list;

@@ -13,21 +13,25 @@ public class Islem2 {
 		DAO dao = new DAO();
 		List<Kullanici> list = dao.getKullaniciList();
 
-		for (Kullanici kullanici : list) {
-			System.out.println(kullanici.getKullaniciAdi());
-			for (Rol rol : kullanici.getRol()) {
-				System.out.println(rol.getName());
-			}
-			System.out.println("*/*/**/*/*/*//*/*/*/*/*/*/*/**/*/");
+//		for (Kullanici kullanici : list) {
+//			System.out.println(kullanici.getKullaniciAdi());
+//			for (Rol rol : kullanici.getRol()) {
+//				System.out.println(rol.getName());
+//			}
+//			System.out.println("*/*/**/*/*/*//*/*/*/*/*/*/*/**/*/");
+//		}
+
+		Kullanici kul = list.get(1);
+		for (Rol rol : kul.getRol()) {
+			System.out.println(rol.getName());
 		}
-
-		List<Sunucu> listSun = dao.getSunucuList();
-
-		for (Sunucu sunucu : listSun) {
-			System.out.println(sunucu.getName());
-			sunucu.getSorumluPersonel().get(0).getName();
-
-		}
+//		List<Sunucu> listSun = dao.getSunucuList();
+//
+//		for (Sunucu sunucu : listSun) {
+//			System.out.println(sunucu.getName());
+//			sunucu.getSorumluPersonel().get(0).getName();
+//
+//		}
 
 	}
 }

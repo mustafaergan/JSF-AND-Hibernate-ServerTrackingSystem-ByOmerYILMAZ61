@@ -75,6 +75,7 @@ public class SunucuBean implements Serializable {
 
 	public List<Sunucu> gosterilcekList() {
 
+		this.gosterilcekList = new ArrayList<>();
 		Kullanici kullanici = kullaniciVer(LoginBean.getInstance().getKullanici());
 
 		for (Rol rol : kullanici.getRol()) {
